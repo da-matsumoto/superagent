@@ -10,7 +10,7 @@ class App extends Component {
     }
   }
   componentWillMount () {
-    request.get('../public/fruits.json')
+    request.get('./fruits.json')
       .accept('application/json')
       .end((err, res) => {
         this.loadedJSON(err, res)
@@ -29,6 +29,16 @@ class App extends Component {
     if (!this.state.items) {
       return <div className='App'>現在読み込み中</div>
     }
+    const options = this.state.items.map(e => {
+      return <option value={e.price} key={e.name}>
+        {e.name}
+        </option>
+    })
+    return (
+      <div className='App'>
+        果物： <select>{options}</select>
+      </div>
+    )
   }
 }
 export default App;
